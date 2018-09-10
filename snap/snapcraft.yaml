@@ -1,0 +1,39 @@
+name: hub
+version: v2.5.1
+summary: "hub is a command-line wrapper for git that makes you better at GitHub."
+description: |
+  As a contributor to open-source
+  
+  Whether you are beginner or an experienced contributor to open-source, hub makes it easier to fetch repositories, navigate project pages, fork repos and even submit pull requests, all from the command-line.
+
+  As an open-source maintainer
+
+  Maintaining a project is easier when you can easily fetch from other forks, review pull requests and cherry-pick URLs. You can even create a new repo for your next thing.
+
+  Using GitHub for work
+
+  Save time at work by opening pull requests for code reviews and pushing to multiple remotes at once. Even GitHub Enterprise is supported.
+
+  Hub is made by GitHub. This snap is packaged by Ricardo N Feliciano (FelicianoTech) using the `hub` source code available by GitHub.
+grade: stable
+confinement: classic
+icon: icon.png
+
+parts:
+  hub:
+    plugin: nil
+    override-build: |
+      snapcraftctl build
+      export GOPATH=$SNAPCRAFT_PART_INSTALL/go
+      export PATH=$GOPATH/bin:$PATH
+      mkdir -p $GOPATH/src/github.com/github/
+      cd $GOPATH/src/github.com/github/
+      git clone --branch=$SNAPCRAFT_PROJECT_VERSION https://github.com/github/hub.git
+      cd hub
+      CGO_ENABLED=0 go build -ldflags "-X github.com/github/hub/version.Version=`./script/version`"
+      cp hub $SNAPCRAFT_PART_INSTALL
+    build-packages:
+      - git
+apps:
+  hub:
+    command: hub
