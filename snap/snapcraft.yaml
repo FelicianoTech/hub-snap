@@ -1,5 +1,5 @@
 name: hub
-version: v2.14.0
+version: v2.14.1
 summary: "hub is a command-line wrapper for git that makes you better at GitHub."
 description: |
   As a contributor to open-source
