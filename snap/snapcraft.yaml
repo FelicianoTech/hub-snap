@@ -35,8 +35,16 @@ parts:
       cd hub
       CGO_ENABLED=0 go build -ldflags "-X github.com/github/hub/version.Version=`./script/version`"
       cp hub $SNAPCRAFT_PART_INSTALL
+
+      # Download the upstream release to get the man pages
+      curl -sSL "https://github.com/github/hub/releases/download/v`./script/version`/hub-linux-amd64-`./script/version`.tgz" -o hub.tar.gz
+      tar xfz hub.tar.gz
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/share/man/man1
+      cp hub-linux-amd64-`./script/version`/share/man/man1/*.1 $SNAPCRAFT_PART_INSTALL/usr/share/man/man1/
     build-packages:
       - git
 apps:
   hub:
     command: hub
+    environment:
+      MANPATH: "/snap/hub/current/usr/share/man:$MANPATH"
