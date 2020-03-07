@@ -24,6 +24,9 @@ parts:
     plugin: nil
     override-build: |
       snapcraftctl build
+
+      # The hub binary is custom compiled because a static binary is desired
+      # https://github.com/felicianotech/hub-snap/pull/33
       export GOPATH=$SNAPCRAFT_PART_INSTALL/go
       export PATH=$GOPATH/bin:$PATH
       mkdir -p $GOPATH/src/github.com/github/
