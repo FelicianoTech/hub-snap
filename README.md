@@ -26,6 +26,15 @@ In fact, it is suggested to alias `git` to run `hub` instead.
 Convenient commands such as `hub clone felicianotech/hub-snap` could be run instead of the longer `git clone git://github.com/felicianotech/hub-snap.git`.
 A full list of commands can be found in hub's [user manual](https://hub.github.com/hub.1.html).
 
+### Help Text / Man Pages
+
+To use help, run `hub help <topic>`.
+For example, if you want to learn about using pull requests with hub you would run:
+
+```bash
+hub help pull-request
+```
+
 
 ## Development
 
@@ -41,6 +50,15 @@ snapcraft snap
 Originally this snap was suppose to simply package the binaries already published by GitHub.
 Problem is, the binaries they make aren't statically linked which makes the snap world difficult.
 So instead, we're compiling `hub` based off the appropriate Git tag.
+
+
+## Changelog
+
+This is a changelog for the hub snap and not hub itself.
+
+- revision #43
+  - Starting with build 43 (containing hub v2.14.2) the internal help for the CLI works again.
+  - compiled with Go v1.14
 
 
 ## License
