@@ -24,9 +24,14 @@ parts:
     plugin: nil
     override-build: |
       snapcraftctl build
-      curl -sSL "https://github.com/github/hub/releases/download/v2.14.2/hub-linux-amd64-2.14.2.tgz" -o hub.tar.gz
-      tar xfz hub.tar.gz
-      cp hub-linux-amd64-2.14.2/bin/hub $SNAPCRAFT_PART_INSTALL
+      export GOPATH=$SNAPCRAFT_PART_INSTALL/go
+      export PATH=$GOPATH/bin:$PATH
+      mkdir -p $GOPATH/src/github.com/github/
+      cd $GOPATH/src/github.com/github/
+      git clone --branch=$SNAPCRAFT_PROJECT_VERSION https://github.com/github/hub.git
+      cd hub
+      CGO_ENABLED=0 go build -ldflags "-X github.com/github/hub/version.Version=`./script/version`"
+      cp hub $SNAPCRAFT_PART_INSTALL
     build-packages:
       - git
 apps:
