@@ -45,10 +45,11 @@ parts:
       cp hub-linux-amd64-`./script/version`/share/man/man1/*.1 $SNAPCRAFT_PART_INSTALL/usr/share/man/man1/
 
       # setup bash completion
-      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/share/bash-completion/completions
-      cp hub-linux-amd64-`./script/version`/etc/hub.bash_completion.sh $SNAPCRAFT_PART_INSTALL/usr/share/bash-completion/completions/hub
+      cp hub-linux-amd64-`./script/version`/etc/hub.bash_completion.sh $SNAPCRAFT_PART_INSTALL
     build-packages:
       - git
+    prime:
+      - hub.bash_completion.sh
 apps:
   hub:
     command: hub
