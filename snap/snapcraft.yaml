@@ -49,6 +49,8 @@ parts:
     build-packages:
       - git
     prime:
+      - hub
+      - usr/share/man/man1/*
       - hub.bash_completion.sh
 apps:
   hub:
