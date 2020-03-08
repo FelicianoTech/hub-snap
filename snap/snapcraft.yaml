@@ -55,4 +55,4 @@ apps:
     command: hub
     environment:
       MANPATH: "/snap/hub/current/usr/share/man:$MANPATH"
-    completer: "snap/hub/current/usr/share/bash-completion/completions/hub"
+    completer: "hub.bash_completion.sh"
