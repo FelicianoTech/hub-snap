@@ -9,7 +9,7 @@ workflows:
             - build
           filters:
             branches:
-              only: master
+              only: bash-completion
           context: main
 
 jobs:
@@ -49,4 +49,4 @@ jobs:
           command: |
             mkdir .snapcraft
             echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
-            snapcraft push *.snap --release stable
+            snapcraft push *.snap --release edge
